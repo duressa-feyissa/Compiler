@@ -8,7 +8,7 @@ Syntax Analysis: Parses the token sequence using backtracking.
 Semantic Analysis: Performs basic semantic checks to ensure the correctness of the source code.
 Code Generation: Translates the AST into machine code or an intermediate representation.
 
-# Custom Programming Language Features
+# Custom Python Programming Language Features
 The custom programming language is a simple language that supports the following features:
 - Arithmetic operations: addition, subtraction, multiplication, division and modulo
 - Variable declaration and assignment for integers, floats, bool and strings
