@@ -19,9 +19,19 @@ enum class TokenKind
     LPAREN,
     RPAREN,
     ASSIGN,
+    EQUAL,
     VARIABLE,
     PRINT,
-    STRING
+    STRING,
+    BOOLEAN,
+    GREATER,
+    LESS,
+    GREATER_EQUAL,
+    LESS_EQUAL,
+    NOT_EQUAL,
+    AND,
+    OR,
+    NOT
 };
 
 struct Token
@@ -84,7 +94,36 @@ public:
             return getNextToken();
         case '=':
             position++;
-            return {TokenKind::ASSIGN, "="};
+            if (input[position] == '=')
+            {
+                position++;
+                return {TokenKind::EQUAL, "=="};
+            }
+            return {TokenKind::ASSIGN, "="}; // This is now ASSIGN
+        case '>':
+            position++;
+            if (input[position] == '=')
+            {
+                position++;
+                return {TokenKind::GREATER_EQUAL, ">="};
+            }
+            return {TokenKind::GREATER, ">"};
+        case '<':
+            position++;
+            if (input[position] == '=')
+            {
+                position++;
+                return {TokenKind::LESS_EQUAL, "<="};
+            }
+            return {TokenKind::LESS, "<"};
+        case '!':
+            position++;
+            if (input[position] == '=')
+            {
+                position++;
+                return {TokenKind::NOT_EQUAL, "!="};
+            }
+            return {TokenKind::NOT, "!"}; // Added logical NOT
         }
 
         if (isalpha(input[position]))
@@ -92,7 +131,7 @@ public:
             return getIdentifierToken();
         }
 
-        if (input[position] == '"')
+        if (input[position] == '"' || input[position] == '\'')
         {
             return getStringToken();
         }
@@ -116,7 +155,7 @@ private:
     {
         string value;
         position++;
-        while (position < input.length() && (input[position] != '"' || input[position] == '\''))
+        while (position < input.length() && (input[position] != '"' && input[position] != '\''))
         {
             value += input[position];
             position++;
@@ -137,6 +176,22 @@ private:
         if (value == "print")
         {
             return {TokenKind::PRINT, value};
+        }
+        else if (value == "True" || value == "False")
+        {
+            return {TokenKind::BOOLEAN, value};
+        }
+        else if (value == "and")
+        {
+            return {TokenKind::AND, value};
+        }
+        else if (value == "or")
+        {
+            return {TokenKind::OR, value};
+        }
+        else if (value == "not")
+        {
+            return {TokenKind::NOT, value};
         }
 
         return {TokenKind::VARIABLE, value};

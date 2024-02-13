@@ -6,7 +6,7 @@ x = y + z
 y = x + z
 z = x + y
 
-print("Simple Math") # prints "Simple Math"
+print("Test 2: Print variables and perform mathematical operations")
 
 # comment will be ignored
 a = z + y - (x % y) + (x * z) + (y / 2) * (x - y * z) # Another Comment
@@ -15,13 +15,13 @@ print(a + x + y + z) # prints -7938
 
 print(x + y)  # prints 36
 
-result = 2 * (x + y)  
+result = 2 * (x + y)
 
 print(result) # prints 72
 
 c = 7
 
-result = x - y * c  
+result = x - y * c
 
 print(result) #prints -140
 
@@ -29,7 +29,6 @@ a = 4
 
 b = 2
 
-result = a * b 
+result = a * b
 
 print(result) # prints 8
-
